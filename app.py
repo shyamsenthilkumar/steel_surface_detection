@@ -1,7 +1,7 @@
 import os
 import cv2
 import numpy as np
-from flask import Flask, render_template, request, redirect, url_for, Response
+from flask import Flask, render_template, request, redirect, url_for, Response, jsonify
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 from werkzeug.utils import secure_filename
@@ -43,12 +43,14 @@ def prepare_image(filepath):
     img_array = np.expand_dims(img_array, axis=0)
     return img_array
 
+
 def predict_defect(filepath):
     """Run prediction on image file"""
     img_array = prepare_image(filepath)
     prediction = model.predict(img_array)
     predicted_class = np.argmax(prediction, axis=1)[0]
     return class_names[predicted_class]
+
 
 # -----------------------------
 # 4. Flask Routes
@@ -79,6 +81,10 @@ def index():
 # -----------------------------
 def gen_frames():
     cap = cv2.VideoCapture(0)
+    if not cap.isOpened():
+        print("⚠️ No camera detected.")
+        return
+
     while True:
         success, frame = cap.read()
         if not success:
@@ -117,7 +123,17 @@ def camera():
 
 
 # -----------------------------
-# 6. Run the App
+# 6. Health Check (for Render)
+# -----------------------------
+@app.route("/health")
+def health():
+    return jsonify({"status": "ok"})
+
+
+# -----------------------------
+# 7. Run the App (Gunicorn-ready)
 # -----------------------------
 if __name__ == "__main__":
-    app.run(debug=True)
+    # For local testing only
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
