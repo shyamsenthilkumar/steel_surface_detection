@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prediction Result</title>
+    <style>
+        body {
+            background: url("{{ url_for('static', filename='bg.jpg') }}") no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 50px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-top: 80px;
+        }
+        h2 {
+            font-size: 40px;
+            margin-bottom: 30px;
+        }
+        p {
+            font-size: 28px;
+            margin: 20px 0;
+        }
+        img {
+            margin: 20px;
+            border: 5px solid white;
+            border-radius: 10px;
+        }
+        a {
+            text-decoration: none;
+            font-size: 22px;
+            padding: 15px 30px;
+            border-radius: 10px;
+            background: #dc3545;
+            color: white;
+            margin: 10px;
+            display: inline-block;
+        }
+        a:hover {
+            background: #a71d2a;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Prediction Result</h2>
+        <p><b>Predicted Defect:</b> {{ label }}</p>
+        <img src="{{ image_file }}" alt="Uploaded Image" width="400"><br>
+        <a href="{{ url_for('index') }}">Test Another Image</a>
+        <a href="{{ url_for('camera') }}">Go to Live Camera</a>
+    </div>
+</body>
+</html>

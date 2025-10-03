@@ -1,0 +1,62 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    background: url('../images/steel_background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+
+h1 {
+    font-size: 3em;
+    text-shadow: 2px 2px 8px black;
+    margin-bottom: 30px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 15px 30px;
+    margin: 20px;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+    border: 2px solid white;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: yellow;
+    cursor: pointer;
+}
+
+.prediction-container {
+    position: relative;
+    display: inline-block;
+    margin-top: 40px;
+}
+
+.prediction-container img {
+    max-width: 600px;
+    border: 3px solid white;
+    border-radius: 10px;
+}
+
+.bounding-box {
+    position: absolute;
+    border: 3px solid red;
+    font-size: 1.5em;
+    color: yellow;
+    font-weight: bold;
+    padding: 5px;
+    background-color: rgba(0,0,0,0.5);
+}
